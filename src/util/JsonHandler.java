@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -29,17 +30,32 @@ public class JsonHandler {
         }
     }
 
-    public void loadData(List<Expense> expenses, List<Income> incomes) {
-        try (FileReader reader = new FileReader(FILE_PATH)) { // Tenta abrir um FileReader para o arquivo JSON
-            Type dataType = new TypeToken<DataWrapper>() {}.getType(); // Define o tipo do objeto que será lido do JSON
-            DataWrapper dataWrapper = gson.fromJson(reader, dataType); // Lê e converte o JSON para um objeto DataWrapper
-            if (dataWrapper != null) { // Se a leitura foi bem-sucedida, adiciona os dados lidos às listas fornecidas
+    public List<Expense> loadExpenses() {
+        List<Expense> expenses = new ArrayList<>();
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            Type dataType = new TypeToken<DataWrapper>() {}.getType();
+            DataWrapper dataWrapper = gson.fromJson(reader, dataType);
+            if (dataWrapper != null) {
                 expenses.addAll(dataWrapper.getExpenses());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expenses;
+    }
+
+    public List<Income> loadIncomes() {
+        List<Income> incomes = new ArrayList<>();
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            Type dataType = new TypeToken<DataWrapper>() {}.getType();
+            DataWrapper dataWrapper = gson.fromJson(reader, dataType);
+            if (dataWrapper != null) {
                 incomes.addAll(dataWrapper.getIncomes());
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Em caso de erro, imprime o stack trace
+            e.printStackTrace();
         }
+        return incomes;
     }
 
     // Classe interna para encapsular os dados de despesas e entradas

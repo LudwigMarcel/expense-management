@@ -28,6 +28,28 @@ public class Management {
 		saveToJson();
 	}
 
+	public Double getSubTotalExpense() {
+		Double subTotal = 0.0;
+		for (int i = 0; i < expenses.size(); i++) {
+			subTotal += expenses.get(i).getValue();
+		}
+		return subTotal;
+	}
+
+	public Double getSubTotalIncome() {
+		Double subTotal = 0.0;
+		for (int i = 0; i < incomes.size(); i++) {
+			subTotal += incomes.get(i).getValue();
+		}
+		return subTotal;
+	}
+
+	public Double getTotal() {
+		Double subTotalExpense = getSubTotalExpense();
+		Double subTotalIncome = getSubTotalIncome();
+		return subTotalIncome - subTotalExpense;
+	}
+
 	public List<Expense> getExpenses() {
 		return expenses;
 	}
@@ -41,6 +63,15 @@ public class Management {
 	}
 
 	private void loadFromJson() {
-		jsonHandler.loadData(expenses, incomes);
+		List<Expense> loadedExpenses = jsonHandler.loadExpenses();
+		List<Income> loadedIncomes = jsonHandler.loadIncomes();
+
+		if (loadedExpenses != null) {
+			expenses.addAll(loadedExpenses);
+		}
+
+		if (loadedIncomes != null) {
+			incomes.addAll(loadedIncomes);
+		}
 	}
 }

@@ -1,1 +1,66 @@
-{"expenses":[{"id":1,"category":1,"transactionNature":1,"transactionType":1,"value":150.0,"installment":1,"dueDate":"Jun 25, 2024, 4:15:55 PM","description":"Rancho"}],"incomes":[{"id":1,"category":1,"transactionNature":1,"transactionType":1,"value":5000.0,"installment":1,"dueDate":"Jun 25, 2024, 4:15:55 PM","description":"salario"}]}
+{
+    "expenses": [
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 150.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:16 PM",
+            "description": "Rancho"
+        },
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 30.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:16 PM",
+            "description": "IFood"
+        },
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 15.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:16 PM",
+            "description": "Gasolina"
+        },
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 50.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:16 PM",
+            "description": "Brinco"
+        }
+    ],
+    "incomes": [
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 5000.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:17 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 200.0,
+            "installment": 1,
+            "dueDate": "Jun 25, 2024, 5:48:17 PM",
+            "description": "Bonus"
+        }
+    ]
+}
