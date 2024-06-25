@@ -13,7 +13,7 @@ import entities.Expense;
 import entities.Income;
 
 public class JsonHandler {
-    private static final String FILE_PATH = "C://Users/londo/eclipse-workspace/data.json"; // Caminho do arquivo JSON
+    private static final String FILE_PATH = "C://Users/londo/eclipse-workspace/expense-management/data.json"; // Caminho do arquivo JSON
     private Gson gson;
 
     public JsonHandler() {

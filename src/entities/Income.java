@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Income {
 
@@ -86,6 +87,34 @@ public class Income {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Income [id=" + id + ", category=" + category + ", transactionNature=" + transactionNature
+				+ ", transactionType=" + transactionType + ", value=" + value + ", installment=" + installment
+				+ ", dueDate=" + dueDate + ", description=" + description + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(category, description, dueDate, id, installment, transactionNature, transactionType, value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Income other = (Income) obj;
+		return Objects.equals(category, other.category) && Objects.equals(description, other.description)
+				&& Objects.equals(dueDate, other.dueDate) && Objects.equals(id, other.id)
+				&& Objects.equals(installment, other.installment)
+				&& Objects.equals(transactionNature, other.transactionNature)
+				&& Objects.equals(transactionType, other.transactionType) && Objects.equals(value, other.value);
 	}
 
 }
