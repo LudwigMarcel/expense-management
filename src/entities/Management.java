@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import util.JsonHandler;
@@ -19,34 +20,81 @@ public class Management {
 	}
 
 	public void addExpense(Expense expense) {
-		expenses.add(expense);
+		if (expense.getInstallment() > 1) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(expense.getDueDate());
+			for (int i = 0; i < (expense.getInstallment()); i++) {
+				expenses.add(new Expense(expense.getId(), expense.getCategory(), expense.getTransactionNature(),
+						expense.getTransactionType(), expense.getValue(), expense.getInstallment(), calendar.getTime(),
+						expense.getDescription()));
+				calendar.add(Calendar.MONTH, 1);
+			}
+		} else {
+			expenses.add(expense);
+		}
 		saveToJson();
 	}
 
 	public void addIncome(Income income) {
-		incomes.add(income);
+		if (income.getInstallment() > 1) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(income.getDueDate());
+			for (int i = 0; i < (income.getInstallment()); i++) {
+				incomes.add(new Income(income.getId(), income.getCategory(), income.getTransactionNature(),
+						income.getTransactionType(), income.getValue(), income.getInstallment(), calendar.getTime(),
+						income.getDescription()));
+				calendar.add(Calendar.MONTH, 1);
+			}
+		} else {
+			incomes.add(income);
+		}
 		saveToJson();
 	}
 
 	public Double getSubTotalExpense() {
+		return getSubTotalExpense(Calendar.getInstance());
+	}
+
+	public Double getSubTotalExpense(Calendar calendar) {
 		Double subTotal = 0.0;
-		for (int i = 0; i < expenses.size(); i++) {
-			subTotal += expenses.get(i).getValue();
+		for (Expense expense : expenses) {
+			Calendar expenseCalendar = Calendar.getInstance();
+			expenseCalendar.setTime(expense.getDueDate());
+			if (expenseCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+					&& expenseCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+				subTotal += expense.getValue();
+			}
 		}
 		return subTotal;
 	}
 
 	public Double getSubTotalIncome() {
+		return getSubTotalIncome(Calendar.getInstance());
+	}
+
+	public Double getSubTotalIncome(Calendar calendar) {
 		Double subTotal = 0.0;
-		for (int i = 0; i < incomes.size(); i++) {
-			subTotal += incomes.get(i).getValue();
+		for (Income income : incomes) {
+			Calendar incomeCalendar = Calendar.getInstance();
+			incomeCalendar.setTime(income.getDueDate());
+			if (incomeCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+					&& incomeCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+				subTotal += income.getValue();
+			}
 		}
 		return subTotal;
 	}
 
 	public Double getTotal() {
-		Double subTotalExpense = getSubTotalExpense();
-		Double subTotalIncome = getSubTotalIncome();
+		Calendar calendar = Calendar.getInstance();
+		double subTotalExpense = getSubTotalExpense(calendar);
+		double subTotalIncome = getSubTotalIncome(calendar);
+		return subTotalIncome - subTotalExpense;
+	}
+
+	public Double getTotal(Calendar calendar) {
+		Double subTotalExpense = getSubTotalExpense(calendar);
+		Double subTotalIncome = getSubTotalIncome(calendar);
 		return subTotalIncome - subTotalExpense;
 	}
 
@@ -73,5 +121,13 @@ public class Management {
 		if (loadedIncomes != null) {
 			incomes.addAll(loadedIncomes);
 		}
+	}
+
+	public void saveData() {
+		saveToJson();
+	}
+
+	public void loadData() {
+		loadFromJson();
 	}
 }

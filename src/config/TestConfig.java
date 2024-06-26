@@ -1,26 +1,64 @@
 package config;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import entities.Expense;
 import entities.Income;
 import entities.Management;
-import util.JsonHandler;
 
 public class TestConfig {
 
 	private Management management;
 
-	@Before
+	@Test
 	public void setUp() {
 		management = new Management();
-	}
 
+		// Criar despesas e receitas com parcelas
+		Calendar date1 = Calendar.getInstance();
+		date1.set(2024, Calendar.JUNE, 12);
+		Date dueDate1 = date1.getTime();
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2024, Calendar.MAY, 12); // 12 de maio de 2024
+		Date dueDate = calendar.getTime();
+
+		Expense expense = new Expense(1, 1, 1, 1, 300.0, 1, dueDate1, "Calça"); 
+		Expense expense1 = new Expense(1, 1, 1, 1, 150.0, 3, dueDate, "Rancho"); // 3 parcelas
+		Income income = new Income(1, 1, 1, 1, 5000.0, 12, dueDate, "Salario"); // Receita anual
+
+		// Adicionar despesas e receitas ao management
+		Management management = new Management();
+		management.addExpense(expense);
+		management.addExpense(expense1);
+		management.addIncome(income);
+
+		// Simular recarregamento do aplicativo
+		management = new Management();
+
+		List<Expense> expenses = management.getExpenses();
+		List<Income> incomes = management.getIncomes();
+
+		// Verificar as despesas e receitas carregadas
+		System.out.println(date1.getTime());
+		System.out.println(calendar.getTime());
+		System.out.println(dueDate);
+		System.out.println("Expenses: " + expenses);
+		System.out.println("Incomes: " + incomes);
+
+		double subTotalExpense = management.getSubTotalExpense(date1);
+		double subTotalIncome = management.getSubTotalIncome(date1);
+		double total = management.getTotal(date1);
+
+		// Imprimir resultados
+		System.out.println("Subtotal of all expenses: " + subTotalExpense);
+		System.out.println("Subtotal of all incomes: " + subTotalIncome);
+		System.out.println("Total (Income - Expense): " + total);
+	}
 	/*
 	 * @Test public void testAddExpense() { Expense expense = new Expense(1, 1, 1,
 	 * 1, 150.0, 1, new Date(), "Rancho"); Expense expense1 = new Expense(1, 1, 1,
@@ -47,35 +85,29 @@ public class TestConfig {
 	 * List<Income> incomes = management.getIncomes(); //
 	 * assertFalse(incomes.isEmpty()); // assertEquals(2, incomes.size()); //
 	 * assertEquals(income, incomes.get(0)); }
-	 */
-
-	@Test
-	public void testSubTotal() {
-
-		JsonHandler jsonHandler = new JsonHandler();
-
-		// Carregar despesas e receitas do arquivo JSON
-		List<Expense> expenses = jsonHandler.loadExpenses();
-		List<Income> incomes = jsonHandler.loadIncomes();
-
-		// Adicionar despesas e receitas ao management
-		if (management == null) {
-			management.getExpenses().addAll(expenses);
-			management.getIncomes().addAll(incomes);
-		}
-
-		// Calcular subtotais e total
-		double subTotalExpense = management.getSubTotalExpense();
-		double subTotalIncome = management.getSubTotalIncome();
-		double total = management.getTotal();
-
-		// Imprimir resultados
-		System.out.println("Subtotal of all expenses: " + subTotalExpense);
-		System.out.println("Subtotal of all incomes: " + subTotalIncome);
-		System.out.println("Total (Income - Expense): " + total);
-
-	}
-	/*
+	 * 
+	 * 
+	 * @Test public void testSubTotal() {
+	 * 
+	 * JsonHandler jsonHandler = new JsonHandler();
+	 * 
+	 * // Carregar despesas e receitas do arquivo JSON List<Expense> expenses =
+	 * jsonHandler.loadExpenses(); List<Income> incomes = jsonHandler.loadIncomes();
+	 * 
+	 * // Adicionar despesas e receitas ao management if (management == null) {
+	 * management.getExpenses().addAll(expenses);
+	 * management.getIncomes().addAll(incomes); }
+	 * 
+	 * // Calcular subtotais e total double subTotalExpense =
+	 * management.getSubTotalExpense(); double subTotalIncome =
+	 * management.getSubTotalIncome(); double total = management.getTotal();
+	 * 
+	 * // Imprimir resultados System.out.println("Subtotal of all expenses: " +
+	 * subTotalExpense); System.out.println("Subtotal of all incomes: " +
+	 * subTotalIncome); System.out.println("Total (Income - Expense): " + total);
+	 * 
+	 * }
+	 * 
 	 * @Test public void testSaveAndLoadData() { Expense expense = new Expense(1, 1,
 	 * 1, 1, 150.0, 1, new Date(), "Rancho"); Income income = new Income(1, 1, 1, 1,
 	 * 5000.0, 1, new Date(), "Salario");
