@@ -1,3 +1,11 @@
+/*
+ * TO DO LIST:
+ * 	metodo retorna lista de expense/income do mes/ano, por categoria/type
+ * 	grafico demonstrativo por mes/ano
+ * 	implementar CRUD
+ * 	interface JavaFX
+ */
+
 package entities;
 
 import java.util.ArrayList;
@@ -24,7 +32,7 @@ public class Management {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(expense.getDueDate());
 			for (int i = 0; i < (expense.getInstallment()); i++) {
-				expenses.add(new Expense(expense.getId(), expense.getCategory(), expense.getTransactionNature(),
+				expenses.add(new Expense(expense.getCategory(), expense.getTransactionNature(),
 						expense.getTransactionType(), expense.getValue(), expense.getInstallment(), calendar.getTime(),
 						expense.getDescription()));
 				calendar.add(Calendar.MONTH, 1);
@@ -40,9 +48,8 @@ public class Management {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(income.getDueDate());
 			for (int i = 0; i < (income.getInstallment()); i++) {
-				incomes.add(new Income(income.getId(), income.getCategory(), income.getTransactionNature(),
-						income.getTransactionType(), income.getValue(), income.getInstallment(), calendar.getTime(),
-						income.getDescription()));
+				incomes.add(new Income(income.getCategory(), income.getTransactionNature(), income.getTransactionType(),
+						income.getValue(), income.getInstallment(), calendar.getTime(), income.getDescription()));
 				calendar.add(Calendar.MONTH, 1);
 			}
 		} else {
@@ -68,6 +75,22 @@ public class Management {
 		return subTotal;
 	}
 
+	public Double getSubTotalExpenseYear() {
+		return getSubTotalExpenseYear(Calendar.getInstance());
+	}
+
+	public Double getSubTotalExpenseYear(Calendar calendar) {
+		Double subTotal = 0.0;
+		for (Expense expense : expenses) {
+			Calendar expenseCalendar = Calendar.getInstance();
+			expenseCalendar.setTime(expense.getDueDate());
+			if (expenseCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
+				subTotal += expense.getValue();
+			}
+		}
+		return subTotal;
+	}
+
 	public Double getSubTotalIncome() {
 		return getSubTotalIncome(Calendar.getInstance());
 	}
@@ -79,6 +102,22 @@ public class Management {
 			incomeCalendar.setTime(income.getDueDate());
 			if (incomeCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
 					&& incomeCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+				subTotal += income.getValue();
+			}
+		}
+		return subTotal;
+	}
+
+	public Double getSubTotalIncomeYear() {
+		return getSubTotalIncomeYear(Calendar.getInstance());
+	}
+
+	public Double getSubTotalIncomeYear(Calendar calendar) {
+		Double subTotal = 0.0;
+		for (Income income : incomes) {
+			Calendar incomeCalendar = Calendar.getInstance();
+			incomeCalendar.setTime(income.getDueDate());
+			if (incomeCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
 				subTotal += income.getValue();
 			}
 		}
@@ -98,12 +137,73 @@ public class Management {
 		return subTotalIncome - subTotalExpense;
 	}
 
+	public Double getTotalYear() {
+		Calendar calendar = Calendar.getInstance();
+		double subTotalExpense = getSubTotalExpenseYear(calendar);
+		double subTotalIncome = getSubTotalIncomeYear(calendar);
+		return subTotalIncome - subTotalExpense;
+	}
+
+	public Double getTotalYear(Calendar calendar) {
+		Double subTotalExpense = getSubTotalExpenseYear(calendar);
+		Double subTotalIncome = getSubTotalIncomeYear(calendar);
+		return subTotalIncome - subTotalExpense;
+	}
+
 	public List<Expense> getExpenses() {
 		return expenses;
 	}
 
 	public List<Income> getIncomes() {
 		return incomes;
+	}
+
+	public List<Expense> getExpenseByMonth(Calendar calendar) {
+		List<Expense> aux = new ArrayList<>();
+		for (Expense expense : expenses) {
+			Calendar expenseCalendar = Calendar.getInstance();
+			expenseCalendar.setTime(expense.getDueDate());
+			if (expenseCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+					&& expenseCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+				aux.add(expense);
+			}
+		}
+		return aux;
+	}
+
+	public List<Expense> getExpenseByCategory(Integer category, Calendar calendar) {
+		List<Expense> monthlyExpenses = getExpenseByMonth(calendar);	
+		List<Expense> aux = new ArrayList<>();
+		for (Expense expense : monthlyExpenses) {			
+			if (expense.getCategory().equals(category)) {
+				aux.add(expense);
+			}
+		}
+		return aux;
+	}
+
+	public List<Income> getIncomeByMonth(Calendar calendar) {
+		List<Income> aux = new ArrayList<>();
+		for (Income income : incomes) {
+			Calendar incomeCalendar = Calendar.getInstance();
+			incomeCalendar.setTime(income.getDueDate());
+			if (incomeCalendar.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+					&& incomeCalendar.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)) {
+				aux.add(income);
+			}
+		}
+		return aux;
+	}
+
+	public List<Income> getIncomByCategory(Integer category, Calendar calendar) {
+		List<Income> monthlyIncomes = getIncomeByMonth(calendar);
+		List<Income> aux = new ArrayList<>();
+		for (Income income : monthlyIncomes) {
+			if (income.getCategory().equals(category)) {
+				aux.add(income);
+			}
+		}
+		return aux;
 	}
 
 	private void saveToJson() {

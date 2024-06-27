@@ -5,21 +5,23 @@ import java.util.Objects;
 
 public class Expense {
 
+	private static Integer lastID = 0;
 	private Integer id;
 	private Integer category;
 	private Integer transactionNature;
 	private Integer transactionType;
 	private Double value;
-	private Integer installment;
+	private Integer installment = 1;
 	private Date dueDate;
 	private String description;
 
 	public Expense() {
 	}
 
-	public Expense(Integer id, Integer category, Integer transactionNature, Integer transactionType, Double value,
+	//Credit
+	public Expense(Integer category, Integer transactionNature, Integer transactionType, Double value,
 			Integer installment, Date dueDate, String description) {
-		this.id = id;
+		this.id = ++lastID;
 		this.category = category;
 		this.transactionNature = transactionNature;
 		this.transactionType = transactionType;
@@ -28,7 +30,18 @@ public class Expense {
 		this.dueDate = dueDate;
 		this.description = description;
 	}
-
+	
+	//Debit
+	public Expense(Integer category, Integer transactionNature, Integer transactionType, Double value, Date dueDate, String description) {
+		this.id = ++lastID;
+		this.category = category;
+		this.transactionNature = transactionNature;
+		this.transactionType = transactionType;
+		this.value = value;
+		this.dueDate = dueDate;
+		this.description = description;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
