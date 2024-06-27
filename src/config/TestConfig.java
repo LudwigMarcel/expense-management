@@ -28,8 +28,8 @@ public class TestConfig {
 		calendar.set(2024, Calendar.MAY, 12); // 12 de maio de 2024
 		Date dueDate = calendar.getTime();
 
-		Expense expense = new Expense(7, 1, 1, 300.0, dueDate1, "Calça");
-		Expense expense1 = new Expense(1, 1, 1, 150.0, 3, dueDate1, "Rancho"); // 3 parcelas
+		Expense expense = new Expense(1, 1, 1, 300.0, dueDate1, "Rancho");
+		Expense expense1 = new Expense(7, 1, 1, 150.0, 3, dueDate1, "Calça"); // 3 parcelas
 		Income income = new Income(4, 1, 1, 1500.0, 12, dueDate1, "Salario"); // Receita anual
 		Income income1 = new Income(10, 1, 1, 500.0, dueDate1, "Frellance"); // Receita anual
 
@@ -47,10 +47,17 @@ public class TestConfig {
 
 		Calendar date1 = Calendar.getInstance();
 		date1.set(2024, Calendar.JUNE, 12);
-
+		Date upDate = date1.getTime();
+		
 		List<Expense> expenses = management.getExpenses();
 		List<Income> incomes = management.getIncomes();
 
+		//Update expense
+		management.updateExpense(1, 1, 1, 1, 350.0, upDate, "Rancho");
+		
+		//Delete income
+		management.deleteIncome(2);
+		
 		// Verificar as despesas e receitas carregadas
 		System.out.println(date1.getTime());
 

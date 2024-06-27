@@ -1,1 +1,166 @@
-{"expenses":[{"id":1,"category":7,"transactionNature":1,"transactionType":1,"value":300.0,"installment":1,"dueDate":"Jun 12, 2024, 4:59:55 PM","description":"Calça"},{"id":3,"category":1,"transactionNature":1,"transactionType":1,"value":150.0,"installment":3,"dueDate":"Jun 12, 2024, 4:59:55 PM","description":"Rancho"},{"id":4,"category":1,"transactionNature":1,"transactionType":1,"value":150.0,"installment":3,"dueDate":"Jul 12, 2024, 4:59:55 PM","description":"Rancho"},{"id":5,"category":1,"transactionNature":1,"transactionType":1,"value":150.0,"installment":3,"dueDate":"Aug 12, 2024, 4:59:55 PM","description":"Rancho"}],"incomes":[{"id":3,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Jun 12, 2024, 4:59:55 PM","description":"Salario"},{"id":4,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Jul 12, 2024, 4:59:55 PM","description":"Salario"},{"id":5,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Aug 12, 2024, 4:59:55 PM","description":"Salario"},{"id":6,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Sep 12, 2024, 4:59:55 PM","description":"Salario"},{"id":7,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Oct 12, 2024, 4:59:55 PM","description":"Salario"},{"id":8,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Nov 12, 2024, 4:59:55 PM","description":"Salario"},{"id":9,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Dec 12, 2024, 4:59:55 PM","description":"Salario"},{"id":10,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Jan 12, 2025, 4:59:55 PM","description":"Salario"},{"id":11,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Feb 12, 2025, 4:59:55 PM","description":"Salario"},{"id":12,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Mar 12, 2025, 4:59:55 PM","description":"Salario"},{"id":13,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"Apr 12, 2025, 4:59:55 PM","description":"Salario"},{"id":14,"category":4,"transactionNature":1,"transactionType":1,"value":1500.0,"installment":12,"dueDate":"May 12, 2025, 4:59:55 PM","description":"Salario"},{"id":2,"category":10,"transactionNature":1,"transactionType":1,"value":500.0,"installment":1,"dueDate":"Jun 12, 2024, 4:59:55 PM","description":"Frellance"}]}
+{
+    "expenses": [
+        {
+            "id": 1,
+            "category": 1,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 350.0,
+            "installment": 1,
+            "dueDate": "Jun 12, 2024, 6:42:02 PM",
+            "description": "Rancho"
+        },
+        {
+            "id": 3,
+            "category": 7,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 150.0,
+            "installment": 3,
+            "dueDate": "Jun 12, 2024, 6:42:02 PM",
+            "description": "Calça"
+        },
+        {
+            "id": 4,
+            "category": 7,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 150.0,
+            "installment": 3,
+            "dueDate": "Jul 12, 2024, 6:42:02 PM",
+            "description": "Calça"
+        },
+        {
+            "id": 5,
+            "category": 7,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 150.0,
+            "installment": 3,
+            "dueDate": "Aug 12, 2024, 6:42:02 PM",
+            "description": "Calça"
+        }
+    ],
+    "incomes": [
+        {
+            "id": 3,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Jun 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 4,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Jul 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 5,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Aug 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 6,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Sep 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 7,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Oct 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 8,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Nov 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 9,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Dec 12, 2024, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 10,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Jan 12, 2025, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 11,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Feb 12, 2025, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 12,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Mar 12, 2025, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 13,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "Apr 12, 2025, 6:42:02 PM",
+            "description": "Salario"
+        },
+        {
+            "id": 14,
+            "category": 4,
+            "transactionNature": 1,
+            "transactionType": 1,
+            "value": 1500.0,
+            "installment": 12,
+            "dueDate": "May 12, 2025, 6:42:02 PM",
+            "description": "Salario"
+        }
+    ]
+}

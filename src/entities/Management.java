@@ -1,8 +1,7 @@
 /*
  * TO DO LIST:
- * 	metodo retorna lista de expense/income do mes/ano, por categoria/type
+ * 	metodo retorna lista de expense/income type
  * 	grafico demonstrativo por mes/ano
- * 	implementar CRUD
  * 	interface JavaFX
  */
 
@@ -10,6 +9,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import util.JsonHandler;
@@ -27,6 +27,7 @@ public class Management {
 		loadFromJson();
 	}
 
+	// Create Methods
 	public void addExpense(Expense expense) {
 		if (expense.getInstallment() > 1) {
 			Calendar calendar = Calendar.getInstance();
@@ -58,6 +59,7 @@ public class Management {
 		saveToJson();
 	}
 
+	// Read Methods
 	public Double getSubTotalExpense() {
 		return getSubTotalExpense(Calendar.getInstance());
 	}
@@ -172,9 +174,9 @@ public class Management {
 	}
 
 	public List<Expense> getExpenseByCategory(Integer category, Calendar calendar) {
-		List<Expense> monthlyExpenses = getExpenseByMonth(calendar);	
+		List<Expense> monthlyExpenses = getExpenseByMonth(calendar);
 		List<Expense> aux = new ArrayList<>();
-		for (Expense expense : monthlyExpenses) {			
+		for (Expense expense : monthlyExpenses) {
 			if (expense.getCategory().equals(category)) {
 				aux.add(expense);
 			}
@@ -204,6 +206,82 @@ public class Management {
 			}
 		}
 		return aux;
+	}
+
+	// Update Methods
+	public void updateExpense(Integer id, Integer category, Integer transactionNature, Integer transactionType,
+			Double value, Integer installment, Date dueDate, String description) {
+		for (Expense expense : expenses) {
+			if (expense.getId().equals(id)) {
+				expense.setCategory(category);
+				expense.setTransactionNature(transactionNature);
+				expense.setTransactionType(transactionType);
+				expense.setValue(value);
+				expense.setInstallment(installment);
+				expense.setDueDate(dueDate);
+				expense.setDescription(description);
+				saveToJson();
+				return;
+			}
+		}
+	}
+	public void updateExpense(Integer id, Integer category, Integer transactionNature, Integer transactionType,
+			Double value,Date dueDate, String description) {
+		for (Expense expense : expenses) {
+			if (expense.getId().equals(id)) {
+				expense.setCategory(category);
+				expense.setTransactionNature(transactionNature);
+				expense.setTransactionType(transactionType);
+				expense.setValue(value);
+				expense.setDueDate(dueDate);
+				expense.setDescription(description);
+				saveToJson();
+				return;
+			}
+		}
+	}
+
+	public void updateIncome(Integer id, Integer category, Integer transactionNature, Integer transactionType,
+			Double value, Integer installment, Date dueDate, String description) {
+		for (Income income : incomes) {
+			if (income.getId().equals(id)) {
+				income.setCategory(category);
+				income.setTransactionNature(transactionNature);
+				income.setTransactionType(transactionType);
+				income.setValue(value);
+				income.setInstallment(installment);
+				income.setDueDate(dueDate);
+				income.setDescription(description);
+				saveToJson();
+				return;
+			}
+		}
+	}
+	public void updateIncome(Integer id, Integer category, Integer transactionNature, Integer transactionType,
+			Double value, Date dueDate, String description) {
+		for (Income income : incomes) {
+			if (income.getId().equals(id)) {
+				income.setCategory(category);
+				income.setTransactionNature(transactionNature);
+				income.setTransactionType(transactionType);
+				income.setValue(value);
+				income.setDueDate(dueDate);
+				income.setDescription(description);
+				saveToJson();
+				return;
+			}
+		}
+	}
+
+	// Delete Methods
+	public void deleteExpense(Integer expenseID) {
+		expenses.removeIf(expense -> expense.getId().equals(expenseID));
+		saveToJson();
+	}
+
+	public void deleteIncome(Integer incomeID) {
+		incomes.removeIf(income -> income.getId().equals(incomeID));
+		saveToJson();
 	}
 
 	private void saveToJson() {
